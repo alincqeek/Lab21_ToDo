@@ -1,4 +1,4 @@
-const vrema = document.getElementById("vrema");
+const vrema = document.querySelector(".vrema p");
 const start = document.getElementById("start");
 const stop = document.getElementById("stop");
 const sbros = document.getElementById("sbros");
@@ -7,6 +7,7 @@ let min = 0;
 let sek = 0;
 let chas = 0;
 let timerId = null;
+
 function updateDisplay() {
   const fChas = chas < 10 ? "0" + chas : chas;
   const fMin = min < 10 ? "0" + min : min;
@@ -17,7 +18,6 @@ function updateDisplay() {
 
 function vpered() {
   if (timerId !== null) return;
-  clear();
 
   timerId = setInterval(() => {
     sek++;
@@ -26,6 +26,7 @@ function vpered() {
       sek = 0;
       min++;
     }
+
     if (min === 60) {
       min = 0;
       chas++;
@@ -41,15 +42,17 @@ function stopTimer() {
     timerId = null;
   }
 }
+
 function sbrosTimer() {
-    stopTimer(); 
-    chas = 0;
-    min = 0;
-    sek = 0;
-    
-    updateDisplay(); 
+  stopTimer();
+  chas = 0;
+  min = 0;
+  sek = 0;
+  updateDisplay();
 }
+
 start.addEventListener("click", vpered);
 stop.addEventListener("click", stopTimer);
 sbros.addEventListener("click", sbrosTimer);
+
 updateDisplay();
